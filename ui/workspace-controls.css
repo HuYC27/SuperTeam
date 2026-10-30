@@ -1,0 +1,64 @@
+/* Keep the native drag surface between the menu and the window buttons. */
+html.has-app-menu body, html.has-app-menu.native-shell body {grid-template-rows:34px minmax(0,1fr)}
+html.has-app-menu .rail, html.has-app-menu .sidebar, html.has-app-menu main,
+html.has-app-menu.native-shell .rail, html.has-app-menu.native-shell .sidebar, html.has-app-menu.native-shell main {height:calc(100vh - 34px);grid-row:2}
+html.has-app-menu #desktopControls {display:flex;grid-row:1;grid-column:1/-1;height:34px;padding:0 8px;background:var(--rail-surface);overflow:visible;z-index:70;gap:0}
+html.has-app-menu:not(.native-shell) #desktopControls > button {display:none}
+#desktopControls .window-drag-space {min-width:24px;flex:1}
+.app-menu-bar {display:flex;align-self:stretch;align-items:center;gap:2px;user-select:none;-webkit-app-region:no-drag}
+.app-menu {position:relative;align-self:stretch;display:flex;align-items:center;-webkit-app-region:no-drag}
+#desktopControls .app-menu-trigger {width:auto;min-width:46px;height:28px;padding:0 11px;display:block;font-size:13px;color:var(--ink);border-radius:6px;-webkit-app-region:no-drag;cursor:default}
+#desktopControls .app-menu-trigger:hover,#desktopControls .app-menu-trigger[aria-expanded=true] {background:color-mix(in srgb,var(--ink) 8%,transparent)}
+.app-menu-popup {position:absolute;top:calc(100% + 2px);left:0;min-width:236px;padding:5px;background:var(--surface);color:var(--ink);border:1px solid var(--stroke);border-radius:10px;box-shadow:0 8px 30px rgb(0 0 0 / .14);max-height:calc(100vh - 50px);overflow-y:auto;z-index:75;animation:workspace-menu-in 100ms ease-out;-webkit-app-region:no-drag}
+#desktopControls .app-menu-item {display:flex;align-items:center;justify-content:space-between;gap:25px;width:100%;height:34px;padding:0 10px;border-radius:6px;color:var(--ink);font-size:13px;white-space:nowrap;cursor:default}
+#desktopControls .app-menu-item:hover,#desktopControls .app-menu-item:focus-visible {background:var(--accent-soft);outline:none}
+#desktopControls .app-menu-item:disabled {opacity:.4;background:none;cursor:default}
+.app-menu-item kbd {color:var(--secondary);font:11px/1.4 inherit;white-space:nowrap}
+.app-menu-separator {height:1px;background:var(--stroke);margin:5px}
+.app-menu-popup[hidden],.chat-split-pane[hidden],.chat-split-divider[hidden] {display:none!important}
+.workspace-help-dialog {width:570px;max-width:calc(100vw - 32px)}
+.workspace-help-dialog p {font-size:14px;line-height:1.85;margin:16px 0;color:var(--secondary)}
+.workspace-shortcut-row {display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--stroke);font-size:14px}
+.workspace-shortcut-row kbd {font:12px/1.5 Consolas,monospace;background:var(--canvas);border-radius:5px;padding:3px 7px;color:var(--secondary)}
+.workspace-help-dialog>.button {margin-top:20px}
+body.sidebar-collapsed:not(.settings-open) {grid-template-columns:68px minmax(0,1fr)}
+body.sidebar-collapsed:not(.settings-open)>.sidebar {display:none}
+body.sidebar-collapsed.panel-open:not(.settings-open) {grid-template-columns:68px minmax(0,1fr) 302px}
+body.chat-split-open main {position:relative;display:grid;grid-template-columns:minmax(0,var(--chat-primary-width,50%)) 6px minmax(0,1fr);grid-template-rows:70px minmax(0,1fr);min-width:0;overflow:hidden}
+body.chat-split-open main>.chat-header {grid-column:1;grid-row:1;min-width:0;padding-left:18px;padding-right:12px;height:70px}
+body.chat-split-open main>#chatView {grid-column:1;grid-row:2;min-height:0;min-width:0}
+body.chat-split-open main>.notice {grid-column:1}
+body.chat-split-open .room-heading {min-width:0;gap:8px}
+body.chat-split-open .room-heading h2 {overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+body.chat-split-open .chat-header .mode-badge {display:none}
+body.chat-split-open .chat-header .header-actions {gap:0;flex-shrink:0}
+body.chat-split-open .messages {padding-left:18px;padding-right:18px}
+body.chat-split-open .composer-area {padding-left:15px;padding-right:15px}
+.chat-split-pane {grid-column:3;grid-row:1/-1;display:flex;flex-direction:column;min-height:0;min-width:0;overflow:hidden;background:var(--canvas);animation:workspace-pane-in 150ms ease-out}
+.chat-split-toolbar {display:flex;align-items:center;gap:6px;height:70px;flex:0 0 70px;background:var(--sidebar-surface);padding:0 14px;box-shadow:0 7px 20px rgb(0 0 0 / .045);z-index:1}
+.chat-split-room {appearance:auto;flex:1;min-width:0;max-width:100%;text-overflow:ellipsis;border:0;border-radius:7px;padding:8px;background:transparent;color:var(--ink);font-size:15px;line-height:1.5;cursor:pointer}
+.chat-split-room:focus-visible {outline:2px solid var(--accent)}
+.chat-split-room option {color:var(--ink);background:var(--surface)}
+.chat-split-frame {display:block;flex:1;width:100%;min-width:0;min-height:0;border:0;background:var(--canvas)}
+.chat-split-divider {grid-column:2;grid-row:1/-1;width:6px;background:var(--stroke);cursor:col-resize;touch-action:none;position:relative;z-index:8}
+.chat-split-divider:hover,.chat-split-divider:focus-visible {background:color-mix(in srgb,var(--accent) 45%,var(--stroke));outline:none}
+body.split-resizing {cursor:col-resize;user-select:none}
+body.split-resizing .chat-split-pane:after {content:'';position:absolute;inset:0;z-index:9;cursor:col-resize}
+body.settings-open .chat-split-pane,body.settings-open .chat-split-divider {display:none!important}
+/* The iframe owns a complete app but presents just its conversation and composer. */
+html.chat-pane-document,html.chat-pane-document.native-shell {border-radius:0}
+html.chat-pane-document body,html.chat-pane-document.native-shell body {display:block!important;height:100vh;overflow:hidden;grid-template-columns:none!important;grid-template-rows:none!important}
+html.chat-pane-document .rail,html.chat-pane-document .sidebar,html.chat-pane-document #desktopControls,html.chat-pane-document .chat-header,html.chat-pane-document #settingsPage,html.chat-pane-document #terminalPanel {display:none!important}
+html.chat-pane-document main,html.chat-pane-document.native-shell main {height:100vh!important;width:100%;display:flex!important;flex-direction:column;min-width:0;overflow:hidden}
+html.chat-pane-document #chatView {display:flex;flex:1;min-height:0;width:100%}
+html.chat-pane-document .messages {padding:22px 18px}
+html.chat-pane-document .composer-area,html.chat-pane-document.native-shell .composer-area {padding-left:15px;padding-right:15px;padding-bottom:22px}
+html.chat-pane-document .activity-panel {top:0!important;height:100vh;max-width:100%;grid-row:auto}
+@keyframes workspace-menu-in {from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:none}}
+@keyframes workspace-pane-in {from{opacity:.4}to{opacity:1}}
+@media(max-width:1200px) {body.sidebar-collapsed:not(.settings-open),body.sidebar-collapsed.panel-open:not(.settings-open){grid-template-columns:60px minmax(0,1fr)}}
+@media(max-width:800px) {body.sidebar-collapsed:not(.settings-open),body.sidebar-collapsed.panel-open:not(.settings-open){grid-template-columns:54px minmax(0,1fr)}body.chat-split-open:not(.settings-open){grid-template-columns:54px minmax(0,1fr)}body.chat-split-open:not(.settings-open)>.sidebar{display:none}body.chat-split-open .header-actions>#showFiles,body.chat-split-open .header-actions>#searchHistory{display:none}body.chat-split-open main>.chat-header,.chat-split-toolbar{padding-left:9px;padding-right:7px}.chat-split-toolbar{gap:1px}body.chat-split-open .messages{padding:18px 10px}body.chat-split-open .composer-area{padding-left:8px;padding-right:8px}body.chat-split-open .reply-hint{max-width:85px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}}
+@media(max-width:580px) {body.sidebar-collapsed:not(.settings-open),body.sidebar-collapsed.panel-open:not(.settings-open),body.chat-split-open:not(.settings-open){grid-template-columns:46px minmax(0,1fr)}html.has-app-menu .sidebar{top:34px}.app-menu-popup{min-width:210px}#desktopControls .app-menu-trigger{padding:0 7px;min-width:40px}body.chat-split-open .chat-header .room-heading #headerAvatar{display:none}body.chat-split-open main{grid-template-columns:minmax(0,var(--chat-primary-width,50%)) 6px minmax(0,1fr);grid-template-rows:64px minmax(0,1fr)}body.chat-split-open main>.chat-header,.chat-split-toolbar{height:64px;flex-basis:64px}.chat-split-room{font-size:13px;padding:5px}body.chat-split-open .chat-header .header-actions>#showActivity{display:none}}
+@media(prefers-reduced-motion:reduce) {.app-menu-popup,.chat-split-pane{animation:none!important;transition:none!important}}
+
+body.chat-split-open main>.content-tabs{display:none!important}

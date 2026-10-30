@@ -1,0 +1,50 @@
+/* Docked workspace regions. Rail/list span the terminal; chats/history shrink above it. */
+:root{--workspace-rail:68px;--activity-width:320px;--terminal-height:280px}
+html.has-app-menu body,html.has-app-menu.native-shell body{grid-template-rows:34px minmax(0,1fr) auto}
+html.has-app-menu .rail,html.has-app-menu .sidebar,html.has-app-menu.native-shell .rail,html.has-app-menu.native-shell .sidebar{grid-row:2 / -1}
+html.has-app-menu main{grid-row:2;height:auto!important;min-height:0}
+html.has-app-menu body.panel-open{grid-template-columns:var(--workspace-rail) var(--sidebar-width,288px) minmax(0,1fr) var(--activity-width)}
+html.has-app-menu body.sidebar-collapsed.panel-open:not(.settings-open){grid-template-columns:var(--workspace-rail) minmax(0,1fr) var(--activity-width)}
+.terminal-panel{position:relative;inset:auto;grid-column:3 / -1;grid-row:3;z-index:9;width:auto;min-height:0;height:var(--terminal-height);max-height:none;box-shadow:0 -5px 20px rgb(0 0 0 / .045);border-top:1px solid var(--stroke);overflow:visible}
+body.sidebar-collapsed:not(.settings-open) .terminal-panel{grid-column:2 / -1}
+.terminal-head{padding:9px 16px;flex:none}.terminal-head button:hover{background:var(--accent-soft)}
+.terminal-output{min-height:0}.terminal-form{flex:none;padding:8px 12px 12px}
+.terminal-resize{position:absolute;left:0;right:0;top:-4px;height:8px;cursor:row-resize;touch-action:none;z-index:12}
+.terminal-resize:hover:after,.terminal-resize:focus-visible:after{content:'';position:absolute;height:2px;left:0;right:0;top:3px;background:var(--secondary)}
+html.has-app-menu .activity-panel{position:relative;inset:auto;grid-column:-2 / -1;grid-row:2;width:auto!important;height:auto;min-height:0;max-width:none;padding:0;display:flex;flex-direction:column;overflow:visible;border-left:1px solid var(--stroke);box-shadow:none;background:var(--surface);z-index:8}
+.activity-panel[hidden]{display:none!important}.activity-panel .panel-heading{flex:none;padding:21px 19px 13px;margin:0}
+#activityContent{flex:1;min-height:0;overflow:auto;padding:0 19px;scrollbar-gutter:stable;overscroll-behavior:contain;margin:4px 0 8px}
+.activity-panel .panel-bottom{flex:none;padding:12px 18px 18px}
+.activity-resize{position:absolute;left:-4px;top:0;bottom:0;width:8px;cursor:col-resize;touch-action:none;z-index:15}
+.activity-resize:hover:after,.activity-resize:focus-visible:after{content:'';position:absolute;width:2px;top:0;bottom:0;left:3px;background:var(--secondary)}
+body.workspace-resizing,body.workspace-resizing *{user-select:none!important}body.workspace-resizing iframe{pointer-events:none}
+/* Fullscreen and maximize are separate commands; edge controls follow the window clip. */
+html.has-app-menu #desktopControls{padding:0;overflow:visible}
+#desktopControls .app-menu-bar{margin-left:var(--app-menu-inset,79px)}
+#desktopControls>#windowClose{width:46px;border-top-right-radius:var(--shell-radius,8px)!important}
+#desktopControls>#windowClose:hover{background:#c94747!important}
+.content-tabs{display:none!important}
+.file-tabs button,.field-note,.task-head,.task-step,.task-step .step-status,.task-metric,.presence-chip,.skill-source,.contact-info p{color:var(--secondary)}
+.empty-list,.round-progress,.contact-info small,.task-reason{color:var(--secondary)}
+.message-action.selected{color:var(--ink);background:var(--accent-soft)}
+.file-tabs button.selected{color:var(--ink);border-bottom-color:var(--ink)}
+.task-status,.task-status.completed,.task-status.running{color:var(--ink)}
+.task-status.failed{color:#ae584b}html[data-theme=dark] .task-status.failed{color:#dfa498}
+#centralNotice[data-kind=success] .notice-text,html[data-theme=dark] #centralNotice[data-kind=success] .notice-text{color:var(--ink)}
+.chat-split-divider{background:color-mix(in srgb,var(--ink) 8%,var(--canvas))}
+@media(max-width:1200px){:root{--workspace-rail:60px}}
+@media(max-width:1100px){html.has-app-menu body.chat-split-open.panel-open:not(.settings-open){grid-template-columns:var(--workspace-rail) minmax(0,1fr) var(--activity-width)}body.chat-split-open.panel-open:not(.settings-open)>.sidebar{display:none}body.chat-split-open.panel-open:not(.settings-open) .terminal-panel{grid-column:2 / -1}}
+@media(max-width:800px){:root{--workspace-rail:54px}html.has-app-menu body.panel-open{grid-template-columns:54px minmax(0,1fr) var(--activity-width)}body.panel-open>.sidebar{display:none}body.panel-open .terminal-panel,body.chat-split-open .terminal-panel{grid-column:2 / -1}}
+@media(max-width:580px){:root{--workspace-rail:46px}html.has-app-menu body.panel-open{grid-template-columns:46px minmax(0,1fr) var(--activity-width)}.terminal-panel{grid-column:2 / -1}.activity-panel .panel-heading{padding:14px 12px}#activityContent{padding:0 12px}}
+html.chat-pane-document body{display:block!important}html.chat-pane-document .terminal-panel{display:none!important}
+
+/* Compact workspace heading with a more readable application menu. */
+.sidebar-heading{padding-top:17px;padding-bottom:16px}#desktopControls .app-menu-trigger{font-size:14px}
+.chat-header{height:60px}body.chat-split-open main{grid-template-rows:60px minmax(0,1fr);grid-template-columns:minmax(0,var(--chat-primary-width,50%)) 3px minmax(0,1fr)}body.chat-split-open main>.chat-header{height:60px}.chat-split-toolbar{height:60px;flex-basis:60px}.chat-split-divider{width:3px}.chat-split-divider:before{content:'';position:absolute;left:-3px;right:-3px;top:0;bottom:0}
+
+/* Taller app chrome; compact chat heading remains separate. */
+html.has-app-menu body,html.has-app-menu.native-shell body{grid-template-rows:44px minmax(0,1fr) auto}
+html.has-app-menu #desktopControls{height:44px}#desktopControls>button{height:44px!important}#desktopControls .app-menu-trigger{height:36px;font-size:15px}#desktopControls .window-drag-space{height:44px}.top-panel-buttons button{height:36px}
+html.has-app-menu .rail,html.has-app-menu .sidebar,html.has-app-menu.native-shell .rail,html.has-app-menu.native-shell .sidebar{height:calc(100vh - 44px)}
+html.chat-pane-document main,html.chat-pane-document.native-shell main{height:100vh!important}
+#attachmentDialog[open]{top:44px;height:calc(100vh - 44px)}

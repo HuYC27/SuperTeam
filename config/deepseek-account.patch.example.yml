@@ -1,0 +1,21 @@
+# Project-local account route; never modify the original desktop profile.
+- id: authorization
+  disabled: false
+- id: credentials
+  disabled: false
+- id: deepseek-account
+  disabled: false
+- id: llm-deepseek
+  disabled: true
+- id: agent-default-model
+  config:
+    provider: deepseek-account
+    model: deepseek-flash
+    reasoningEffort: off
+- id: permission
+  config:
+    presets:
+      read-only:
+        sandbox: read-only
+        approval: never
+    defaultPreset: read-only

@@ -1,0 +1,36 @@
+name: Bug report / 问题报告
+description: Report a reproducible SuperTeam problem / 报告可复现的问题
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: "Do not include API keys, cookies, private chats or research participant data. 请勿提交密钥、Cookie、私人聊天或受试者数据。"
+  - type: input
+    id: version
+    attributes:
+      label: SuperTeam version / 版本
+      placeholder: 1.0.0
+    validations:
+      required: true
+  - type: input
+    id: windows
+    attributes:
+      label: Windows version / 系统版本
+      placeholder: Windows 11 24H2
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce / 复现步骤
+      description: Use synthetic or redacted examples only. / 只使用合成或脱敏材料。
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected and actual behavior / 预期与实际结果
+    validations:
+      required: true
+

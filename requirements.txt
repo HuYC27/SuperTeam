@@ -1,0 +1,7 @@
+Pillow>=10.4,<13
+PyInstaller>=6.10,<7
+pywebview>=5.3,<7
+pillow-avif-plugin>=1.4,<2
+pillow-heif>=0.20,<2
+xlrd>=2.0,<3
+
